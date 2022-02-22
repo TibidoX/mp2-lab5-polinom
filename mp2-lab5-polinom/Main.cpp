@@ -1,12 +1,12 @@
 #include <iostream>
 #include "TList.h"
 #include "TMonom.h"
-
+#include "TPolinom.h"
 using namespace std;
 void main()
 {
-	TMonom m(2,1,2,3);
-	TList<TMonom> pol;
-	pol.InsFirst(m);
+	TPolinom pol;
+	TMonom m(1, 2, 3, 4);
+	pol.AddMonom(m);
 	cout << pol.GetCurrVal();
 }

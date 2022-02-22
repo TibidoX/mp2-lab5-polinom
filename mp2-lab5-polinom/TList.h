@@ -11,14 +11,21 @@ public:
 	TList()
 	{
 		len = 0;
-		pCurr = pFirst = pPrev = pLast = pStop = nullptr;
+		pCurr = new TNode<T>;
+		pFirst = new TNode<T>;
+		pPrev = new TNode<T>;
+		pLast = new TNode<T>;
+		pStop = new TNode<T>;
+		pCurr = pFirst = pPrev = pLast = pStop;
 	}
 	~TList()
 	{
-		while (pFirst != NULL)
+		pCurr = pFirst;
+		while (pCurr != pStop)
 		{
-			TNode<T>* pDel = pFirst;
-			pFirst = pFirst->pNext;
+			TNode<T>* pDel = pCurr;
+			pPrev = pCurr;
+			pCurr = pCurr->pNext;
 			delete pDel;
 		}
 	}
@@ -29,14 +36,13 @@ public:
 			return pCurr->val;
 		else throw - 1;
 	}
-	void SetCurrVal(T v) { pCurr->val = v; }
+	//void SetCurrVal(T v) { pCurr->val = v; }
 	void InsFirst(T v)
 	{
 		TNode<T>* p = new TNode<T>(v,pFirst);
 		p->val = v;
 		p->pNext = pFirst;
 		pFirst = p;
-		pCurr = p;
 		len++;
 		if (len == 1)
 			pLast = p;
@@ -64,24 +70,32 @@ public:
 			len++;
 		}
 	}
-	void DelCurr()
+	void DelFirst()
 	{
-		if (pCurr == pFirst)
+		if (pFirst != pStop)
 		{
-			if (pFirst != nullptr) {
-				TNode<T>* pDel = pFirst;
-				pFirst = pFirst->pNext;
-				delete[] pDel;
-				len--;
-			}
-		}
-		else
-		{
-			TNode<T>* pDel = pCurr;
-			pCurr = pCurr->pNext;
-			pPrev->pNext = pCurr;
-			delete[] pDel;
+			TNode<T>* pDel = pFirst;
+			pFirst = pFirst->pNext;
+			delete pDel;
 			len--;
+			if (len == 0) pLast = pStop;
 		}
 	}
+	void DelCurr()
+	{
+		if (pCurr != pStop)
+			if (pCurr == pFirst) DelFirst();
+			else
+			{
+				TNode<T>* pDel = pCurr;
+				pCurr = pCurr->pNext;
+				pPrev->pNext = pCurr;
+				delete pDel;
+				len--;
+			}
+		else throw - 1;
+	}
+	void Reset() { pCurr = pFirst; pPrev = pStop; }
+	void GoNext() { pPrev = pCurr; pCurr = pCurr->pNext; }
+	bool IsEnd() { return(pCurr == pStop); }
 };
