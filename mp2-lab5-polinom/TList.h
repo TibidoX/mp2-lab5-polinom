@@ -39,7 +39,7 @@ public:
 	//void SetCurrVal(T v) { pCurr->val = v; }
 	void InsFirst(T v)
 	{
-		TNode<T>* p = new TNode<T>(v,pFirst);
+		TNode<T>* p = new TNode<T>;
 		p->val = v;
 		p->pNext = pFirst;
 		pFirst = p;
@@ -64,7 +64,7 @@ public:
 		else if (pCurr == pLast) InsLast(v);
 		else
 		{
-			TNode<T>* p = new TNode<T>(v, pCurr);
+			TNode<T>* p = new TNode<T>;
 			pPrev->pNext = p;
 			pCurr = p;
 			len++;

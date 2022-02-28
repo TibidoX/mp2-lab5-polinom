@@ -20,11 +20,17 @@ public:
 				if (pCurr->val.c == 0) DelCurr();
 				break;
 			}
-			if (m > pCurr->val)
+			if ((m > pCurr->val) && (m < pCurr->pNext->val))
 				InsCurr(m);
 		}
-		if (m > pLast->val){
+		if (m > pLast->val)
+		{
 			if (IsEnd()) { InsLast(m); }
 		}
+	}
+	void Print()
+	{
+		for (Reset(); !IsEnd(); GoNext())
+			cout << pCurr->val;
 	}
 };

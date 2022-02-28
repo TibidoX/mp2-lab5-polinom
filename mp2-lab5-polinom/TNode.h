@@ -6,9 +6,10 @@ struct TNode
 	T val;
 	TNode* pNext;
 
-	TNode(T v, TNode* p=nullptr)
+	TNode(T v, TNode* p)
 	{
 		val = v;
 		pNext = p;
 	}
+	TNode(){}
 };

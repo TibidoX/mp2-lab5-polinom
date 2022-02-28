@@ -9,12 +9,12 @@ public:
 	THeadList()
 	{
 		len = 0;
-		/*pCurr = new TNode<T>;
+		pCurr = new TNode<T>;
 		pFirst = new TNode<T>;
 		pPrev = new TNode<T>;
 		pLast = new TNode<T>;
 		pStop = new TNode<T>;
-		pHead = new TNode<T>;*/
+		pHead = new TNode<T>;
 		pHead->pNext = pHead;
 		pStop = pHead;
 		pCurr = pPrev = pLast = pFirst = pStop;
