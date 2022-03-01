@@ -44,4 +44,5 @@ public:
 		TList::DelFirst();
 		pHead->pNext = pFirst;
 	}
+	
 };
