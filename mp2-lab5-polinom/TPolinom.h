@@ -20,12 +20,25 @@ public:
 				if (pCurr->val.c == 0) DelCurr();
 				break;
 			}
-			if ((m > pCurr->val) && (m < pCurr->pNext->val))
+			if ((m > pCurr->val))
+			{
 				InsCurr(m);
+				break;
+			}
 		}
 		if (m > pLast->val)
 		{
-			if (IsEnd()) { InsLast(m); }
+			if(IsEmpty())
+			{
+				InsFirst(m);
+			}
+			else
+			{
+				if (IsEnd())
+				{
+					InsLast(m);
+				}
+			}
 		}
 	}
 	void Print()

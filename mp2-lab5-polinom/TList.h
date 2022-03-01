@@ -11,11 +11,7 @@ public:
 	TList()
 	{
 		len = 0;
-		pCurr = new TNode<T>;
-		pFirst = new TNode<T>;
-		pPrev = new TNode<T>;
-		pLast = new TNode<T>;
-		pStop = new TNode<T>;
+		pStop = nullptr;
 		pCurr = pFirst = pPrev = pLast = pStop;
 	}
 	~TList()

@@ -7,6 +7,6 @@ void main()
 {
 	TPolinom pol;
 	TMonom m(1, 2, 3, 4);
-	//pol.AddMonom(m);
+	pol.AddMonom(m);
 	pol.Print();
 }
