@@ -37,7 +37,7 @@ struct TMonom
 	}
 	friend ostream& operator<<(ostream& os, const TMonom& m)
 	{
-		os << m.c << m.x << m.y << m.z << " ";
+		os << m.c << "x^" << m.x << "y^" << m.y << "z^" << m.z << " ";
 		return os;
 	}
 };

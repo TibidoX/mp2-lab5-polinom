@@ -10,6 +10,13 @@ public:
 		TMonom m(0, 0, 0, -1);
 		pHead->val = m;
 	}
+	TPolinom(TPolinom& c)
+	{
+		for (c.Reset(); !(c.IsEnd()); c.GoNext())
+		{
+			InsLast(c.pCurr->val);
+		}
+	}
 	void AddMonom(TMonom& m)
 	{
 		for (Reset(); !IsEnd(); GoNext())
@@ -74,6 +81,9 @@ public:
 	void Print()
 	{
 		for (Reset(); !IsEnd(); GoNext())
-			cout << pCurr->val;
+			if (pCurr->pNext == pStop)
+				cout << pCurr->val;
+			else 
+				cout << pCurr->val << "+ ";
 	}
 };

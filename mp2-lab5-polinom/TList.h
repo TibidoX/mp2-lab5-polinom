@@ -32,7 +32,7 @@ public:
 			return pCurr->val;
 		else throw - 1;
 	}
-	//void SetCurrVal(T v) { pCurr->val = v; }
+
 	void InsFirst(T v)
 	{
 		TNode<T>* p = new TNode<T>;
