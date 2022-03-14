@@ -56,39 +56,15 @@ public:
 	}
 	void InsCurr(T v)
 	{
-		if (pCurr == pFirst) {
-			InsFirst(v);
-			pPrev = pStop;
-			pCurr = pFirst;
-		}
-		else if (pPrev == pLast) {
-			InsLast(v);
-			pPrev = pLast;
-		}
-		else {
-			TNode<T>* p = new TNode<T>(v, pCurr);
-			if (pPrev != pStop)
-			{
-				pPrev->pNext = p;
-			}
+		if (pCurr == pFirst) InsFirst(v);
+		else if (pCurr == pLast) InsLast(v);
+		else
+		{
+			TNode<T>* p = new TNode<T>;
+			pPrev->pNext = p;
 			pCurr = p;
 			len++;
 		}
-		//if (pCurr == pFirst) {
-		//	InsFirst(v);
-		//	//pCurr = pFirst;
-		//}
-		//else if (pPrev == pLast) {
-		//	InsLast(v);
-		//	//pCurr = pLast;//
-		//}
-		//else
-		//{
-		//	TNode<T>* p = new TNode<T>(v, pCurr);
-		//	pPrev->pNext = p;
-		//	pCurr = p;
-		//	len++;
-		//}
 	}
 	void DelFirst()
 	{
@@ -104,10 +80,7 @@ public:
 	void DelCurr()
 	{
 		if (pCurr != pStop)
-			if (pCurr == pFirst) {
-				DelFirst();
-				//pCurr = pFirst;
-			}
+			if (pCurr == pFirst) DelFirst();
 			else
 			{
 				TNode<T>* pDel = pCurr;

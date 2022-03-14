@@ -6,14 +6,18 @@ using namespace std;
 void main()
 {
 	TPolinom pol;
-	TMonom m(1, 2, 3, 4);
-	TMonom n(2, 2, 3, 4);
-	TMonom l(9, 8, 9, 6);
+	TMonom m(1, 1, 3, 4);
+	TMonom n(2, 2, 2, 3);
+	TMonom l(3, 8, 9, 6);
 	pol.AddMonom(m);
 	pol.AddMonom(n);
 	pol.AddMonom(l);
-	//pol.Print();
-	TPolinom np(pol);
-	TPolinom p = np + pol;
-	p.Print();
+	TPolinom np;
+	np.AddMonom(m);
+	np.AddMonom(n);
+	np.AddMonom(m);
+	TPolinom p = np - pol;
+	cout << p;
+	/*p = p * 2;
+	cout << p;*/
 }

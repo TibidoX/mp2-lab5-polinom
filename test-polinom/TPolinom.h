@@ -15,12 +15,10 @@ public:
 		for (c.Reset(); !(c.IsEnd()); c.GoNext())
 		{
 			InsLast(c.pCurr->val);
-			//pHead = pHead->pNext;
 		}
 	}
 	void AddMonom(TMonom& m)
 	{
-
 		for (Reset(); !IsEnd(); GoNext())
 		{
 			if (m == pCurr->val)
@@ -35,23 +33,20 @@ public:
 				break;
 			}
 		}
-
-		if (IsEnd()) InsLast(m);
-
-		//if (IsEmpty())
-		//{
-		//	InsFirst(m);
-		//	//if (pCurr->val.c == 0) DelCurr();
-		//}
-
-		//if (pLast->val>m)
-		//{
-		//		if (IsEnd())
-		//		{
-		//			InsLast(m);
-		//			//if (pCurr->val.c == 0) DelCurr();
-		//		}
-		//}
+		if (m > pLast->val)
+		{
+			if(IsEmpty())
+			{
+				InsFirst(m);
+			}
+			else
+			{
+				if (IsEnd())
+				{
+					InsLast(m);
+				}
+			}
+		}
 	}
 	TPolinom operator+(TPolinom& pol)
 	{
@@ -72,47 +67,6 @@ public:
 				if (res.pCurr->val.c != 0)
 				{
 					res.GoNext();
-					//pol.GoNext();
-				}
-				else
-				{
-					res.DelCurr();
-					//pol.GoNext();
-				}
-				pol.GoNext();
-			}
-		}
-		return res;
-	}
-
-	TPolinom operator-(TPolinom& pol)
-	{
-		TPolinom res(*this);
-		pol.Reset(); res.Reset();
-		while (!pol.IsEnd())
-		{
-			if (res.pCurr->val > pol.pCurr->val)
-				/*if (pFirst==pLast)
-				{
-					res.InsLast(pol.pCurr->val);
-					pCurr = pLast;
-					res.pLast->val.c *= -1;
-					pol.GoNext();
-				}
-				else*/
-					res.GoNext();
-			else if (res.pCurr->val < pol.pCurr->val)
-			{
-				res.InsCurr(pol.pCurr->val);
-				res.pCurr->val.c *= -1;
-				pol.GoNext();
-			}
-			else
-			{
-				res.pCurr->val.c -= pol.pCurr->val.c;
-				if (res.pCurr->val.c != 0)
-				{
-					res.GoNext();
 					pol.GoNext();
 				}
 				else
@@ -124,17 +78,6 @@ public:
 		}
 		return res;
 	}
-
-	TPolinom operator*(double a)
-	{
-		TPolinom res(*this);
-		for (res.Reset(); !res.IsEnd(); res.GoNext())
-		{
-			res.pCurr->val.c *= a;
-		}
-		return res;
-	}
-
 	/*void Print()
 	{
 		for (Reset(); !IsEnd(); GoNext())
@@ -146,8 +89,6 @@ public:
 
 	friend ostream& operator<<(ostream& os, TPolinom& p)
 	{
-		if (p.IsEmpty())
-			os << 0;
 		for (p.Reset(); !p.IsEnd(); p.GoNext())
 			if (p.pCurr->pNext == p.pStop)
 				os << p.pCurr->val;
