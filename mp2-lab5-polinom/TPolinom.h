@@ -125,6 +125,22 @@ public:
 		return res;
 	}
 
+	TPolinom& operator=(TPolinom& c)
+	{
+		if (this != &c)
+		{
+			for (Reset(); !IsEnd(); GoNext())
+			{
+				DelCurr();
+			}
+			for (c.Reset(); !c.IsEnd(); c.GoNext())
+			{
+				InsLast(c.pCurr->val);
+			}
+		}
+		return *this;
+	}
+
 	TPolinom operator*(double a)
 	{
 		TPolinom res(*this);
@@ -149,6 +165,7 @@ public:
 		if (p.IsEmpty())
 			os << 0;
 		for (p.Reset(); !p.IsEnd(); p.GoNext())
+			//if (p.pCurr==p.pLast)
 			if (p.pCurr->pNext == p.pStop)
 				os << p.pCurr->val;
 			else

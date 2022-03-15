@@ -119,6 +119,13 @@ public:
 		else throw - 1;
 	}
 	void Reset() { pCurr = pFirst; pPrev = pStop; }
-	void GoNext() { pPrev = pCurr; pCurr = pCurr->pNext; }
+	void GoNext() 
+	{
+		if (pCurr != pStop) { 
+			pPrev = pCurr;
+			pCurr = pCurr->pNext; 
+		} 
+	}
+
 	bool IsEnd() { return(pCurr == pStop); }
 };
