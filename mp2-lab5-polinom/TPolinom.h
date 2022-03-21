@@ -1,6 +1,7 @@
 #pragma once
 #include "THeadList.h"
 #include "TMonom.h"
+#include <string>
 
 class TPolinom :public THeadList<TMonom>
 {
@@ -10,12 +11,29 @@ public:
 		TMonom m(0, 0, 0, -1);
 		pHead->val = m;
 	}
+	TPolinom(TMonom m)
+	{
+		TMonom m1(0, 0, 0, -1);
+		pHead->val = m1;
+		AddMonom(m);
+	}
+	TPolinom(int c, int x, int y, int z)
+	{
+		TMonom m1(0, 0, 0, -1);
+		pHead->val = m1;
+		TMonom m(c, x, y, z);
+		AddMonom(m);
+	}
+	/*{
+		TMonom m1(0, 0, 0, -1);
+		pHead->val = m1;
+		pFirst->val = m;
+	}*/
 	TPolinom(TPolinom& c)
 	{
 		for (c.Reset(); !(c.IsEnd()); c.GoNext())
 		{
 			InsLast(c.pCurr->val);
-			//pHead = pHead->pNext;
 		}
 	}
 	void AddMonom(TMonom& m)
@@ -129,7 +147,7 @@ public:
 	{
 		if (this != &c)
 		{
-			for (Reset(); !IsEnd(); GoNext())
+			for (Reset(); !IsEnd();)
 			{
 				DelCurr();
 			}
@@ -139,6 +157,22 @@ public:
 			}
 		}
 		return *this;
+	}
+
+	bool operator==(TPolinom& c)
+	{
+		c.Reset();
+		for (Reset(); !IsEnd(); GoNext()) {
+			if (pCurr->val != c.pCurr->val)
+				return false;
+			c.GoNext();
+		}
+		return true;
+	}
+
+	bool operator!=(TPolinom& c)
+	{
+		return !(*this == c);
 	}
 
 	TPolinom operator*(double a)
@@ -151,14 +185,19 @@ public:
 		return res;
 	}
 
-	/*void Print()
+	TPolinom operator*(TMonom m)
 	{
-		for (Reset(); !IsEnd(); GoNext())
-			if (pCurr->pNext == pStop)
-				cout << pCurr->val;
-			else 
-				cout << pCurr->val << "+ ";
-	}*/
+		TPolinom res(*this);
+		for (res.Reset(); !res.IsEnd(); res.GoNext())
+		{
+			//res = res * m.c;
+			res.pCurr->val.c *= m.c;
+			res.pCurr->val.x += m.x;
+			res.pCurr->val.y += m.y;
+			res.pCurr->val.z += m.z;
+		}
+		return res;
+	}
 
 	friend ostream& operator<<(ostream& os, TPolinom& p)
 	{

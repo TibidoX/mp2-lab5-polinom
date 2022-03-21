@@ -96,6 +96,7 @@ public:
 		{
 			TNode<T>* pDel = pFirst;
 			pFirst = pFirst->pNext;
+			pCurr = pFirst;
 			delete pDel;
 			len--;
 			if (len == 0) pLast = pStop;

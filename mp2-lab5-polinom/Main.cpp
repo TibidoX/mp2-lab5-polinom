@@ -16,8 +16,11 @@ void main()
 	np.AddMonom(m);
 	np.AddMonom(n);
 	np.AddMonom(m);
-	TPolinom p = np - pol;
+	//TPolinom p = np - pol;
 	//cout << p;
-	p = p * 2;
-	cout << p;
+	//p = p * 2;
+	//cout << p << endl;
+	//p = p * n;
+	TPolinom p;
+	cout << pol+np;
 }

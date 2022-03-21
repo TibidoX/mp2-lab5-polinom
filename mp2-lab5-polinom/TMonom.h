@@ -15,6 +15,7 @@ struct TMonom
 		z = _z;
 	}
 	bool operator==(const TMonom& m) {return ((x == m.x) && (y == m.y) && (z == m.z));}
+	bool operator!=(const TMonom& m) { return !(*this == m); }
 	bool operator>(const TMonom& m)
 	{
 		if (x != m.x)
