@@ -70,15 +70,162 @@ TEST(TPolinom, add_when_monom_is_exists)
 TEST(TPolinom, sum_of_polinoms)
 {
 	TPolinom res;
-	TMonom m1(1, 2, 3, 4);
-	TMonom m2(10, 9, 8, 7);
+	TMonom m1(2, 2, 3, 4);
+	TMonom m2(4, 1, 1, 1);
+	TMonom m3(6, 2, 2, 2);
 	res.AddMonom(m1);
 	res.AddMonom(m2);
+	res.AddMonom(m3);
 
-	TPolinom p1(1, 2, 3, 4);
-	TPolinom p2(10, 9, 8, 7);
+	TMonom mm1(1, 2, 3, 4);
+	TMonom mm2(2, 1, 1, 1);
+	TMonom mm3(3, 2, 2, 2);
+	TPolinom p1;
+	TPolinom p2;
+	p1.AddMonom(mm1);
+	p1.AddMonom(mm2);
+	p1.AddMonom(mm3);
+	p2.AddMonom(mm1);
+	p2.AddMonom(mm2);
+	p2.AddMonom(mm3);
 	EXPECT_EQ(true, p1+p2==res);
 }
+
+TEST(TPolinom, sum_of_polinoms_del_first_and_last)
+{
+	TPolinom res;
+	TMonom m(6, 2, 2, 2);
+	res.AddMonom(m);
+
+	TMonom m1(1, 2, 3, 4);
+	TMonom m2(2, 1, 1, 1);
+	TMonom m3(3, 2, 2, 2);
+	TPolinom p2;
+	p2.AddMonom(m1);
+	p2.AddMonom(m2);
+	p2.AddMonom(m3);
+
+	TMonom mm1(-2, 1, 1, 1);
+	TMonom mm2(3, 2, 2, 2);
+	TMonom mm3(-1, 2, 3, 4);
+	TPolinom p1;
+	p1.AddMonom(mm1);
+	p1.AddMonom(mm2);
+	p1.AddMonom(mm3);
+
+	EXPECT_EQ(true, p1 + p2 == res);
+}
+
+TEST(TPolinom, sum_of_polinoms_del_first)
+{
+	TPolinom res;
+	TMonom m(4, 1, 1, 1);
+	TMonom mm(6, 2, 2, 2);
+	res.AddMonom(m);
+	res.AddMonom(mm);
+
+	TMonom m1(1, 2, 3, 4);
+	TMonom m2(2, 1, 1, 1);
+	TMonom m3(3, 2, 2, 2);
+	TPolinom p2;
+	p2.AddMonom(m1);
+	p2.AddMonom(m2);
+	p2.AddMonom(m3);
+
+	TMonom mm1(2, 1, 1, 1);
+	TMonom mm2(3, 2, 2, 2);
+	TMonom mm3(-1, 2, 3, 4);
+	TPolinom p1;
+	p1.AddMonom(mm1);
+	p1.AddMonom(mm2);
+	p1.AddMonom(mm3);
+
+	EXPECT_EQ(true, p1 + p2 == res);
+}
+
+TEST(TPolinom, sum_of_polinoms_del_last)
+{
+	TPolinom res;
+	TMonom m(2, 2, 3, 4);
+	TMonom mm(6, 2, 2, 2);
+	res.AddMonom(m);
+	res.AddMonom(mm);
+
+	TMonom m1(1, 2, 3, 4);
+	TMonom m2(2, 1, 1, 1);
+	TMonom m3(3, 2, 2, 2);
+	TPolinom p2;
+	p2.AddMonom(m1);
+	p2.AddMonom(m2);
+	p2.AddMonom(m3);
+
+	TMonom mm1(-2, 1, 1, 1);
+	TMonom mm2(3, 2, 2, 2);
+	TMonom mm3(1, 2, 3, 4);
+	TPolinom p1;
+	p1.AddMonom(mm1);
+	p1.AddMonom(mm2);
+	p1.AddMonom(mm3);
+
+	EXPECT_EQ(true, p1 + p2 == res);
+}
+
+TEST(TPolinom, sum_of_polinoms_del_all)
+{
+	TPolinom res;
+
+	TMonom m1(1, 2, 3, 4);
+	TMonom m2(2, 1, 1, 1);
+	TMonom m3(3, 2, 2, 2);
+	TPolinom p2;
+	p2.AddMonom(m1);
+	p2.AddMonom(m2);
+	p2.AddMonom(m3);
+
+	TMonom mm1(-2, 1, 1, 1);
+	TMonom mm2(-3, 2, 2, 2);
+	TMonom mm3(-1, 2, 3, 4);
+	TPolinom p1;
+	p1.AddMonom(mm1);
+	p1.AddMonom(mm2);
+	p1.AddMonom(mm3);
+
+	EXPECT_EQ(true, p1 + p2 == res);
+}
+
+TEST(TPolinom, sum_of_polinoms_no_del)
+{
+	TPolinom res;
+	TMonom m1(1, 2, 3, 4);
+	TMonom m2(2, 1, 1, 1);
+	TMonom m3(3, 2, 2, 2);
+	TMonom m4(1, 5, 5, 5);
+	TMonom m5(1, 6, 6, 6);
+	TMonom m6(1, 7, 7, 7);
+
+	res.AddMonom(m1);
+	res.AddMonom(m2);
+	res.AddMonom(m3);
+	res.AddMonom(m4);
+	res.AddMonom(m5);
+	res.AddMonom(m6);
+	
+	TPolinom p2;
+	p2.AddMonom(m1);
+	p2.AddMonom(m2);
+	p2.AddMonom(m3);
+
+	TMonom mm1(1, 5, 5, 5);
+	TMonom mm2(1, 6, 6, 6);
+	TMonom mm3(1, 7, 7, 7);
+	TPolinom p1;
+	p1.AddMonom(m4);
+	p1.AddMonom(m5);
+	p1.AddMonom(m6);
+
+	EXPECT_EQ(true, p1 + p2 == res);
+}
+
 TEST(TPolinom, diff_of_polinoms)
 {
 	TPolinom res;

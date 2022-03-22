@@ -103,45 +103,47 @@ public:
 		return res;
 	}
 
-	TPolinom operator-(TPolinom& pol)
-	{
-		TPolinom res(*this);
-		pol.Reset(); res.Reset();
-		while (!pol.IsEnd())
-		{
-			if (res.pCurr->val > pol.pCurr->val)
-				/*if (pFirst==pLast)
-				{
-					res.InsLast(pol.pCurr->val);
-					pCurr = pLast;
-					res.pLast->val.c *= -1;
-					pol.GoNext();
-				}
-				else*/
-					res.GoNext();
-			else if (res.pCurr->val < pol.pCurr->val)
-			{
-				res.InsCurr(pol.pCurr->val);
-				res.pCurr->val.c *= -1;
-				pol.GoNext();
-			}
-			else
-			{
-				res.pCurr->val.c -= pol.pCurr->val.c;
-				if (res.pCurr->val.c != 0)
-				{
-					res.GoNext();
-					pol.GoNext();
-				}
-				else
-				{
-					res.DelCurr();
-					pol.GoNext();
-				}
-			}
-		}
-		return res;
-	}
+	//TPolinom operator-(TPolinom& pol)
+	//{
+	//	TPolinom res(*this);
+	//	pol.Reset(); res.Reset();
+	//	while (!pol.IsEnd())
+	//	{
+	//		if (res.pCurr->val > pol.pCurr->val)
+	//			/*if (pFirst==pLast)
+	//			{
+	//				res.InsLast(pol.pCurr->val);
+	//				pCurr = pLast;
+	//				res.pLast->val.c *= -1;
+	//				pol.GoNext();
+	//			}
+	//			else*/
+	//				res.GoNext();
+	//		else if (res.pCurr->val < pol.pCurr->val)
+	//		{
+	//			res.InsCurr(pol.pCurr->val);
+	//			res.pCurr->val.c *= -1;
+	//			pol.GoNext();
+	//		}
+	//		else
+	//		{
+	//			res.pCurr->val.c -= pol.pCurr->val.c;
+	//			if (res.pCurr->val.c != 0)
+	//			{
+	//				res.GoNext();
+	//				pol.GoNext();
+	//			}
+	//			else
+	//			{
+	//				res.DelCurr();
+	//				pol.GoNext();
+	//			}
+	//		}
+	//	}
+	//	return res;
+	//}
+
+	
 
 	TPolinom& operator=(TPolinom& c)
 	{
@@ -182,6 +184,14 @@ public:
 		{
 			res.pCurr->val.c *= a;
 		}
+		return res;
+	}
+
+	TPolinom operator-(TPolinom& pol)
+	{
+		TPolinom res(*this);
+		pol = pol * (-1);
+		res = *this + pol;
 		return res;
 	}
 
